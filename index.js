@@ -84,6 +84,9 @@ app.post("/calbmi",async(req,res)=>{
     const height_mtr=Number(height)*0.3048
     const BMI=Number(weight)/(height_mtr)**2
     const new_bmi=new bmiModel({
+        BMI,
+        height:height_mtr,
+        weight,
 
     })
     await new_bmi.save()
@@ -92,7 +95,7 @@ app.post("/calbmi",async(req,res)=>{
 })
 app.get("/getbmi",async(req,res)=>{
     const {user_id}=req.body
-    const all_bmi=await bmiModel.find({user_id})
+    const all_bmi=await bmiModel.find()
     res.send({all_bmi})
 
 })
